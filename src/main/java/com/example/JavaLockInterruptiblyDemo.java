@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-class CounterWithLockInterruptibly {
+public class JavaLockInterruptiblyDemo {
     private int count = 0;
     private final ReentrantLock lock = new ReentrantLock();
 
@@ -25,7 +25,7 @@ class CounterWithLockInterruptibly {
     }
 
     public static void main(String[] args) {
-        CounterWithLockInterruptibly counter = new CounterWithLockInterruptibly();
+        JavaLockInterruptiblyDemo counter = new JavaLockInterruptiblyDemo();
         System.out.println("Initial count: " + counter.getCount());
 
         Runnable task = () -> {
