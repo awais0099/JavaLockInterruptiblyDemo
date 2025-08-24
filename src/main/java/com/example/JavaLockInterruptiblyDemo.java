@@ -24,7 +24,7 @@ class CounterWithLockInterruptibly {
         return count;
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         CounterWithLockInterruptibly counter = new CounterWithLockInterruptibly();
         System.out.println("Initial count: " + counter.getCount());
 
@@ -39,10 +39,18 @@ class CounterWithLockInterruptibly {
 
         t1.start();
         t2.start();
-        Thread.sleep(10); // Ensure contention before interrupting
+        try {
+            Thread.sleep(10); // Ensure contention before interrupting
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         t1.interrupt(); // Interrupt Thread-1
-        t1.join();
-        t2.join();
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println("Final count: " + counter.getCount()); // Likely < 2000
     }
