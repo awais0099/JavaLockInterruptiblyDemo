@@ -22,11 +22,11 @@ jobs:
         run: mvn clean compile --no-transfer-progress
 
       - name: Run the main class
-        run: mvn exec:java -Dexec.mainClass="com.example.CounterWithLockInterruptibly" --no-transfer-progress
+        run: mvn exec:java -Dexec.mainClass="com.example.JavaLockInterruptiblyDemo" --no-transfer-progress
 
       - name: Capture and display output
         run: |
-          OUTPUT=$(mvn exec:java -Dexec.mainClass=com.example.CounterWithLockInterruptibly --no-transfer-progress)
+          OUTPUT=$(mvn exec:java -Dexec.mainClass=com.example.JavaLockInterruptiblyDemo --no-transfer-progress)
           echo "$OUTPUT"
           if [[ "$OUTPUT" == *"Interrupted while waiting for lock"* ]]; then
             echo "Success: Detected interruption as expected"
